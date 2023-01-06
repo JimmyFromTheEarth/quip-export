@@ -94,6 +94,7 @@ npm install quip-export
   --debug                    Extended logging
   --exclude-regex            If passed, exclude documents matching this regex
   --only-index               Do not export documents, just create a CSV document (index.csv) at destination
+  --api-url                  Set API URL for self (or company) hosted Quip instance
 ```
 
 To generate a personal access token, visit the page: [https://quip.com/dev/token](https://quip.com/dev/token)
