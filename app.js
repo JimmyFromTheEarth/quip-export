@@ -167,7 +167,8 @@ class App {
                 documentCSS: this.cliArguments['embedded-styles']? documentCSS : '',
                 embeddedImages: this.cliArguments['embedded-images'],
                 comments: this.cliArguments['comments'],
-                docx: this.cliArguments['docx']
+                docx: this.cliArguments['docx'],
+                excludePattern: this.cliArguments['exclude-regex']
             });
 
         this.quipProcessor.setLogger(this.Logger);
