@@ -167,7 +167,11 @@ class App {
             embeddedImages: this.cliArguments['embedded-images'],
             comments: this.cliArguments['comments'],
             docx: this.cliArguments['docx'],
-            quipApiURL: this.cliArguments['api-url']
+            quipApiURL: this.cliArguments['api-url'],
+            destinationFolder: this.desinationFolder,
+            onlyIndex: this.cliArguments['only-index'],
+            indexFileName: this.cliArguments['index-file-name'],
+            excludePattern: this.cliArguments['exclude-regex']
         };
 
         this.quipProcessor = new QuipProcessor(this.cliArguments.token, this.fileSaver.bind(this), this.progressFunc.bind(this), this.phaseFunc.bind(this), quipProcessorOptions);
