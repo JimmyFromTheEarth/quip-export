@@ -92,6 +92,8 @@ npm install quip-export
   --comments                 Includes comments (messages) for the documents
   --folders "string"         Comma-separated folder's IDs to export
   --debug                    Extended logging
+  --exclude-regex            If passed, exclude documents matching this regex
+  --only-index               Do not export documents, just create a CSV document (index.csv) at destination
 ```
 
 To generate a personal access token, visit the page: [https://quip.com/dev/token](https://quip.com/dev/token)
