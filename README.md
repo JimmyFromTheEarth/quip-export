@@ -86,15 +86,17 @@ npm install quip-export
   -t, --token "string"       Quip Access Token.
   -d, --destination "string" Destination folder for export files
   -z, --zip                  Zip export files
-  --embedded-styles          Embedded in each document stylesheet
-  --embedded-images          Embedded images
+  --embedded-styles          Embedded in each document stylesheet, ignored if '--docx' set
+  --embedded-images          Embedded images, ignored if '--docx' set
   --docx                     Exports documents in MS-Office format (*.docx , *.xlsx)
-  --comments                 Includes comments (messages) for the documents
-  --folders "string"         Comma-separated folder's IDs to export
-  --debug                    Extended logging
+  --comments                 Includes comments (messages) for the documents, ignored if '--docx' set
+  --folders "string"         Comma-separated Quip folder's IDs to export
+  --debug                    Extended logging, default to ./export.log
   --exclude-regex            If passed, exclude documents matching this regex
-  --only-index               Do not export documents, just create a CSV document (index.csv) at destination
+  --only-index               Do not export documents, just create a CSV document (./index.csv) at destination
   --api-url                  Set API URL for self (or company) hosted Quip instance
+  --delay-mode               All API calls with delay in seconds based on rate limits per hour
+  --rate-limits              Set the new rate limit per minute, defaults to 50/minute
 ```
 
 To generate a personal access token, visit the page: [https://quip.com/dev/token](https://quip.com/dev/token)

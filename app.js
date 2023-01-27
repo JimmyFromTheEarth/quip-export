@@ -60,7 +60,7 @@ class App {
     */
     progressFunc(progress) {
         if(this.phase === 'ANALYSIS') {
-            this.spinnerIndicator.text = ` %s  read ${progress.readFolders} folder(s) | ${progress.readThreads} thread(s)`;
+            this.spinnerIndicator.text = ` %s  read ${progress.readFolders} folder(s) | ${progress.readThreads} thread(s) | next all after ${progress.nextCallInSeconds} s | failed ${progress.failedCallsTotal} | rate limits: reset after ${progress.rateLimitsResetAfter} s, remaining ${progress.limitsRmaining} `;
         }
         else if(this.phase === 'EXPORT') {
             this.progressIndicator.update(progress.threadsProcessed);
@@ -145,9 +145,18 @@ class App {
             console.log('Docx export: comments option will be ignored.');
         }
 
+        let forceDelay = false;
+        if(this.cliArguments['delay-mode'] && this.cliArguments['delay-mode'] === true){ forceDelay = true; }
+        const rateLimits = this.cliArguments['rate-limits'] || 0;
+        
+        console.log(`Rate Limits : ${rateLimits}/hour, Delay Mode : ${forceDelay?'On':'Off'}`);
         //Token verification
         const quipService = new QuipService(this.cliArguments.token, this.cliArguments['api-url']);
         quipService.setLogger(this.Logger);
+
+        if(rateLimits > 0) { quipService.setWaitingMs(rateLimits); }
+
+        if(forceDelay) { quipService.setForceDelay(); }
 
         if(!await quipService.checkUser()) {
             console.log(colors.red('ERROR: Token is wrong or expired.'));
@@ -177,6 +186,10 @@ class App {
         this.quipProcessor = new QuipProcessor(this.cliArguments.token, this.fileSaver.bind(this), this.progressFunc.bind(this), this.phaseFunc.bind(this), quipProcessorOptions);
 
         this.quipProcessor.setLogger(this.Logger);
+
+        if(rateLimits > 0) { this.quipProcessor.setWaitingMs(rateLimits); }
+
+        if(forceDelay) { this.quipProcessor.setForceDelay(); }
 
         if(!this.cliArguments['embedded-styles'] && !this.cliArguments['docx']) {
             if(this.cliArguments.zip) {
