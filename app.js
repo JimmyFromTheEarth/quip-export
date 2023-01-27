@@ -149,7 +149,8 @@ class App {
         if(this.cliArguments['delay-mode'] && this.cliArguments['delay-mode'] === true){ forceDelay = true; }
         const rateLimits = this.cliArguments['rate-limits'] || 0;
         
-        console.log(`Rate Limits : ${rateLimits}/hour, Delay Mode : ${forceDelay?'On':'Off'}`);
+        console.log(`Rate Limits : ${rateLimits}/minute`);
+        console.log(`Delay Mode : ${forceDelay?'On':'Off'}`);
         //Token verification
         const quipService = new QuipService(this.cliArguments.token, this.cliArguments['api-url']);
         quipService.setLogger(this.Logger);
