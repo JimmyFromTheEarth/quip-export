@@ -26,7 +26,7 @@ class App {
         this.cliArguments;
         this.zip;
         this.quipProcessor;
-        this.spinnerIndicator = new Spinner(' %s  read 0 folder(s) | 0 thread(s)');
+        this.spinnerIndicator = new Spinner(' %s  read 0 folder(s), 0 thread(s) | ');
         this.progressIndicator = new cliProgress.Bar({
             format: '   |{bar}| {percentage}% | {value}/{total} threads | ETA: {eta_formatted}',
             barCompleteChar: '\u2588',
@@ -60,7 +60,7 @@ class App {
     */
     progressFunc(progress) {
         if(this.phase === 'ANALYSIS') {
-            this.spinnerIndicator.text = ` %s  read ${progress.readFolders} folder(s) | ${progress.readThreads} thread(s) | next all after ${progress.nextCallInSeconds} s | failed ${progress.failedCallsTotal} | rate limits: reset after ${progress.rateLimitsResetAfter} s, remaining ${progress.limitsRmaining} `;
+            this.spinnerIndicator.text = ` %s  read ${progress.readFolders} folder(s), ${progress.readThreads} thread(s) | delay ${progress.nextCallInSeconds} s | failed ${progress.failedCallsTotal} | rate limits: reset in ${progress.rateLimitsResetAfter} s, remaining ${progress.limitsRmaining} `;
         }
         else if(this.phase === 'EXPORT') {
             this.progressIndicator.update(progress.threadsProcessed);
