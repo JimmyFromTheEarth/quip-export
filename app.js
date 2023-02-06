@@ -177,6 +177,8 @@ class App {
             embeddedImages: this.cliArguments['embedded-images'],
             comments: this.cliArguments['comments'],
             docx: this.cliArguments['docx'],
+            docxArchive: this.cliArguments['docx-archive'],
+            docxArchiveInit: this.cliArguments['docx-archive-init'],
             quipApiURL: this.cliArguments['api-url'],
             destinationFolder: this.desinationFolder,
             onlyIndex: this.cliArguments['only-index'],
